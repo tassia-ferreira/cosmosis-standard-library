@@ -113,15 +113,15 @@ params:
     verbose:
         meaning: Print more output.
         type: bool
-        default: False
+        default: false
     fatal_errors:
         meaning: Raise an error instead of returning non-zero on error loading splines. Handy for debugging.
         type: bool
-        default: False
+        default: false
     save_kernels:
         meaning: Save the kernels n(chi) and w(chi) to the block.
         type: bool
-        default: False
+        default: false
     do_exact:
         meaning: Spectra for which to do exact (non-limber) calculation at low ell (space-separated).
         type: str
@@ -201,11 +201,11 @@ params:
     do_rsd:
         meaning: Whether to compute RSD in non-limber calculations.
         type: bool
-        default: False
+        default: false
     fz_from_block:
-        meaning: Whether to get f(z) used in RSD from the datablock. If False, from spline derivative of P(k,z). 
+        meaning: Whether to get f(z) used in RSD from the datablock. If false, from spline derivative of P(k,z). 
         type: bool
-        default: False
+        default: false
 inputs:
     matter_power_nl:
         k_h:

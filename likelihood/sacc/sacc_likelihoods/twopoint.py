@@ -3,6 +3,17 @@ import math
 from cosmosis.datablock import BlockError
 import pathlib
 import sys
+import warnings
+import astropy.units
+
+# Please do not add things to this list
+ANGULAR_UNIT_TYPES = [
+    astropy.units.arcsec,
+    astropy.units.arcmin,
+    astropy.units.rad,
+    astropy.units.deg,
+]
+ANGULAR_UNITS = {unit.name: unit for unit in ANGULAR_UNIT_TYPES}
 
 # Get the SpectrumInterp class from the spec_tools module.
 # Should really put this somewhere else!
@@ -18,8 +29,11 @@ def extract_spectrum_prediction(sacc_data, block, data_type, section, **kwargs):
         x_theory = block[section, "ell"]
     elif category == "real":
         x_theory = block[section, "theta"]
-        theta_theory_unit = block.get_metadata(section, "theta", "unit")
-    
+        # Check if the theory the theta unit stored, if not, assume it is in arcmin.
+        try:
+            theta_theory_unit = block.get_metadata(section, "theta", "unit")
+        except KeyError:
+            theta_theory_unit = 'arcmin'
     #TO-DO: Decide on final nomenclature for cosebis and psi-stats!
     # Given current cosebis module in standard library, the x_nominal should be simply n
     elif category == "cosebis":
@@ -91,6 +105,7 @@ def extract_spectrum_prediction(sacc_data, block, data_type, section, **kwargs):
                     theta_nominal_unit = d['theta_unit']
                 except KeyError:
                     theta_nominal_unit = 'arcmin'
+                    warnings.warn("Theta unit not found in the data file, I will assume it is in arcmin.")
                 # Make sure that the theta units match, if not, convert.
                 # Code adapted from twopoint in 2pt likelihood.
                 if theta_nominal_unit != theta_theory_unit:
