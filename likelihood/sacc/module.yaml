@@ -95,24 +95,17 @@ inputs:
                 the file. It might be galaxy_cl or shear_cl, for example.
             type: real 1d
             default:
-        bin_{i}_{j}:
-            meaning: For various i,j depending what is found in the file, the theory
-                predictions for this value. For example, C_ell.
-            type: real 1d
-            default:
-    shear_xi:
         theta:
-            meaning: If a real-space measurement is used, the angle in arcmin of
+            meaning: If a real-space measurement is used, the angle of
                 the predicted theory curves. The name of the section here depends on the data type used from
                 the file. It might be galaxy_xi or shear_xi, for example.
             type: real 1d
             default:
-        bin_{i}_{j}:
-            meaning: For various i,j depending what is found in the file, the theory
-                predictions for this value. For example, correlation functions.
-            type: real 1d
-            default:
-    cosebis:
+        unit:
+            meaning: If a real-space measurement is used, the unit of the angle of
+                the predicted theory curves.
+            type: str
+            default: arcmin
         n:
             meaning: If COSEBIs measurement is used, the mode values of
                 the predicted theory curves. The name of the section here depends on the data type used from
@@ -121,7 +114,7 @@ inputs:
             default:
         bin_{i}_{j}:
             meaning: For various i,j depending what is found in the file, the theory
-                predictions for this value. For example, E_n or B_n.
+                predictions for this value. For example, C_ell, correlation functions, E_n or B_n.
             type: real 1d
             default:
     one_point:
